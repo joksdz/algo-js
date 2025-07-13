@@ -53,14 +53,15 @@ class List{
     current.next = node 
   }
   insertAt(node , idx){
-    let current = this.head 
+   
     if (idx === 0)
       {
         node.next = this.head
-        this.head = node.next 
-        return this.head
+        this.head = node
+        return 
       }
-    for (let i = 1 ; i < idx  && current !== null ; i++ ) 
+    let current = this.head
+    for (let i = 0 ; i < idx -1  && current !== null ; i++ ) 
       {
         current = current.next 
       }
@@ -83,23 +84,31 @@ class List{
         return m.data
       
   }
-  remove(node)
-  {
-    let head = this.head
-    if (node === this.head)
-      {
-        this.head = node.next
-      }
-    if(node === null){return "bad arg"}
-    for (let i = 1 ; i < node.data - 1 ; i++)
-      {
-        head = head.next 
-      }
-    head.next = node.next 
-    
-    
-    
+  remove(node) {
+  if (!this.head || !node) {
+    return "bad arg";
   }
+  
+  
+  if (this.head === node) {
+    this.head = this.head.next;
+    return;
+  }
+  
+  let current = this.head;
+  
+  
+  while (current.next && current.next !== node) {
+    current = current.next;
+  }
+  
+ 
+  if (current.next === node) {
+    current.next = node.next;
+  } else {
+    return "Node not found";
+  }
+}
   getAt(idx)
   {
     let node = this.head 
@@ -115,7 +124,7 @@ class List{
   }
 
 }
-
+let n0 = new Node(0)
 let n1 = new Node(1)
 let n2 = new Node(2)
 let n3 = new Node(3)
@@ -126,13 +135,13 @@ let n7 = new Node(7)
 let list = new List(n1)
 list.head = n1 
 
-
-list.insertAt(n2 , 1)
-list.insertAt(n3 , 2)
-list.insertAt(n4 , 3)
-list.insertAt(n5 , 4)
-list.insertAt(n6 , 5)
-list.insertAt(n7 , 6)
+list.insertAt(n0 , 0)
+list.insertAt(n2 , 2)
+list.insertAt(n3 , 3)
+list.insertAt(n4 , 4)
+list.insertAt(n5 , 5)
+list.insertAt(n6 , 6)
+list.insertAt(n7 , 7)
 list.remove(n5)
 console.log(list)
 
